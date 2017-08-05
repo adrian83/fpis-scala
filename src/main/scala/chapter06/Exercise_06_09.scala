@@ -14,5 +14,20 @@ class SimpleRNG09(seed: Long) extends SimpleRNG08(seed) {
     flatMap(f1)(f2)(rng)
 
   }
+  
+  
 
 }
+
+object Ex9 extends App {
+  
+    val rnb1 = new SimpleRNG09(15L)
+  val t1 = rnb1.double(rnb1)
+  println(t1)
+  val t2 = rnb1.double(rnb1)
+  println(t2)
+  val t3 = rnb1.double(t2._2)
+  println(t3)
+  
+}
+

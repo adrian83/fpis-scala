@@ -19,3 +19,9 @@ class SimpleRNG07(seed: Long) extends SimpleRNG06(seed) {
       }
   }
 }
+
+object Ex7 extends App {
+  
+  val rnb1 = new SimpleRNG07(15L)
+  
+}

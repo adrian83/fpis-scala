@@ -1,6 +1,5 @@
 package chapter06
 
-
 case class State[S, +A](run: S => (A, S))
 
 object State {
@@ -34,7 +33,8 @@ object State {
         case Nil => (Nil, s)
         case x :: xs => {
           val t = x.run(s)
-          l(xs, t._2)
+          val t2 = l(xs, t._2)
+          (t._1 :: t2._1, t2._2)
         }
       }
     }
@@ -44,5 +44,21 @@ object State {
 
 object Exercise_06_10 extends App {
 
+  println(State.unit(5).run("test"))
+
+  val s: State[String, Int] = State.unit[String, Int](5)
+  println((State.map(s)(i => "thisistest:" + i)).run("test"))
+
+  val longSt = State.unit[String, Long](5l)
+  val intSt = State.unit[String, Int](8)
+  println(State.map2(longSt)(intSt)((a, b) => a + "-" + b).run("test"))
+
+  val st1: State[String, Int] = State.unit[String, Int](1)
+  println(State.flatMap(st1)(i => State.unit[String, Int](i)).run("test"))
+
+  val s1: State[String, Int] = State.unit[String, Int](1)
+  val s2: State[String, Int] = State.unit[String, Int](2)
+  val s3: State[String, Int] = State.unit[String, Int](3)
+  println(State.sequence(List(s1, s2, s3)).run("test"))
 }
 
