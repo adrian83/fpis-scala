@@ -20,12 +20,13 @@ override def double(rng: RNG): (Double, RNG) = {
 object Ex5 extends App {
   
   val rnb1 = new SimpleRNG05(15L)
+  val rnb2 = new SimpleRNG05(17L)
   
-  val t1 = rnb1.ints(6)(rnb1)
+  val t1 = rnb1.double(rnb2)
   println(t1)
-  val t2 = rnb1.ints(6)(rnb1)
+  val t2 = rnb1.double(rnb2)
   println(t2)
-  val t3 = rnb1.ints(6)(t2._2)
+  val t3 = rnb1.double(t2._2)
   println(t3)
 
 }

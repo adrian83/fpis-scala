@@ -12,16 +12,17 @@ class SimpleRNG06(seed: Long) extends SimpleRNG05(seed) {
   }
 }
 
-object Ex6 extends App {
+object Ex6 extends App with RNG {
 
   val rnb1 = new SimpleRNG06(15L)
 
-  val t1 = rnb1.ints(6)(rnb1)
+  val r1: Rand[Int] = rng => (5, rng)
+  val r2: Rand[Long] = rng => (9l, rng)
+
+  val t1 = rnb1.map2(r1, r2)((a, b) => a + "-" + b)(rnb1)
   println(t1)
-  val t2 = rnb1.ints(6)(rnb1)
-  println(t2)
-  val t3 = rnb1.ints(6)(t2._2)
-  println(t3)
+
+  def nextInt: (Int, RNG) = (4, null)
 
 }
 

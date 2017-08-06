@@ -1,5 +1,7 @@
 package chapter06
 
+
+
 trait RNG { 
   type Rand[+A] = RNG => (A, RNG)
 
